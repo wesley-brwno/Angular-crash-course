@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
-  }
+  },
+  {
+    path: 'about/:username',
+    component: AboutComponent
+  },
 ];
 
 @NgModule({
