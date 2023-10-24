@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/api/products/product.service';
 import { ProductRepresentation } from '../services/api/models/product-representations';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-about',
@@ -40,8 +41,16 @@ export class AboutComponent implements OnInit{
 
     this.service.createProduct(product)
       .subscribe({
-        next: (result) => 
-        console.log(result)
-      });
+        next: (result) => {
+        console.log(result);
+      },
+      error: (error: HttpErrorResponse): void => {
+        if (error instanceof ErrorEvent) {
+          console.log('An error occurred:', error)
+        } else {
+          console.log(`Server returned status code ${error.status}`)
+        }
+      }
+    });
   }
 }
